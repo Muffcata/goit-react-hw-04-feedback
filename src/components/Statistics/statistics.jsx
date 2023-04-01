@@ -2,8 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import style from './Statistics.module.css';
 
-// import { useEffect, useState } from 'react';
-
 export const Statistics = ({
   good,
   neutral,
