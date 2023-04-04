@@ -3,7 +3,7 @@ import { Statistics } from './Statistics/statistics';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Section } from './Section/Section';
 import { Notification } from './Notification/Notification';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const App = () => {
   const [good, setGood] = useState(0);
@@ -26,17 +26,24 @@ export const App = () => {
       default:
         console.log(`Sorry, something went wrong`);
     }
+    // countTotalFeedback();
+  };
+
+  useEffect(() => {
+    const countTotalFeedback = () => {
+      setTotal(good + neutral + bad);
+      // countPositiveFeedbackPercentage();
+    };
+
     countTotalFeedback();
-  };
+  }, [good, neutral, bad]);
 
-  const countTotalFeedback = () => {
-    setTotal(good + neutral + bad);
+  useEffect(() => {
+    const countPositiveFeedbackPercentage = () => {
+      setPositive(Math.round((good / total) * 100));
+    };
     countPositiveFeedbackPercentage();
-  };
-
-  const countPositiveFeedbackPercentage = () => {
-    setPositive(Math.round((good / total) * 100));
-  };
+  }, [good, total]);
 
   return (
     <>
